@@ -47,7 +47,11 @@ try:
             response.raise_for_status()
             with open(model_local_path, 'wb') as f:
                 f.write(response.content)
-        gbm_model = pickle.load(model_local_path)
+
+        # Load model using pickle
+        with open(model_local_path, 'rb') as f:
+            gbm_model = pickle.load(f)
+            
     except Exception as e:
         st.error(f"Error loading the model: {e}")
         gbm_model = None
