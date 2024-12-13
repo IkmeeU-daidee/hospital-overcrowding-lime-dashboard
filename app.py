@@ -39,7 +39,7 @@ try:
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
 
     # Download and load model
-    model_url = 'https://raw.githubusercontent.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/main/gbm_model.pkl'
+    model_url = 'https://github.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/blob/main/gbm_model.pkl'
     model_local_path = 'gbm_model.pkl'
     try:
         if not os.path.exists(model_local_path):
@@ -47,11 +47,7 @@ try:
             response.raise_for_status()
             with open(model_local_path, 'wb') as f:
                 f.write(response.content)
-
-        # Load model using pickle
-        with open(model_local_path, 'rb') as f:
-            gbm_model = pickle.load(f)
-
+        gbm_model = pickle.load(model_local_path)
     except Exception as e:
         st.error(f"Error loading the model: {e}")
         gbm_model = None
