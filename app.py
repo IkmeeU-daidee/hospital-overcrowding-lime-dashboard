@@ -10,7 +10,7 @@ from lime.lime_tabular import LimeTabularExplainer
 st.title('Hospital Overcrowding Prediction')
 
 # Load the CSV file directly
-file_path = 'https://github.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/blob/main/Diagnosis_data.csv'
+file_path = 'https://raw.githubusercontent.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/refs/heads/main/Diagnosis_data.csv'
 
 try:
     # Load the data
@@ -37,7 +37,7 @@ try:
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
 
     try:
-        gbm_model = joblib.load('https://raw.githubusercontent.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/refs/heads/main/Diagnosis_data.csv')
+        gbm_model = joblib.load('https://github.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/blob/main/best_gbm_model.pkl')
         if gbm_model is None:
             raise ValueError("The model could not be loaded properly.")
     except Exception as e:
