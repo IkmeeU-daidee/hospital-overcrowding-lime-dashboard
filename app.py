@@ -40,7 +40,7 @@ try:
 
     # Download and load model
     model_url = 'https://github.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/blob/main/best_gbm_model.pkl'
-    model_local_path = 'best_gbm_model.pkl'
+    model_local_path = 'gbm_model.pkl'
     try:
         if not os.path.exists(model_local_path):
             response = requests.get(model_url)
