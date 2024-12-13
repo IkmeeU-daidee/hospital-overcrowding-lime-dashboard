@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
-import joblib
+import pickle
 from sklearn.preprocessing import LabelEncoder
 from lime.lime_tabular import LimeTabularExplainer
 import requests
@@ -47,7 +47,7 @@ try:
             response.raise_for_status()
             with open(model_local_path, 'wb') as f:
                 f.write(response.content)
-        gbm_model = joblib.load(model_local_path)
+        gbm_model = pickle.load(model_local_path)
     except Exception as e:
         st.error(f"Error loading the model: {e}")
         gbm_model = None
