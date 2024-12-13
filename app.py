@@ -37,7 +37,7 @@ try:
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
 
     try:
-        gbm_model = joblib.load('C:/Users/Ikmee U-daidee/best_gbm_model.pkl')
+        gbm_model = joblib.load('https://github.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/blob/main/best_gbm_model.pkl')
         if gbm_model is None:
             raise ValueError("The model could not be loaded properly.")
     except Exception as e:
