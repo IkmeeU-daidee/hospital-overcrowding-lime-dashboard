@@ -5,12 +5,14 @@ from sklearn.model_selection import train_test_split
 import joblib
 from sklearn.preprocessing import LabelEncoder
 from lime.lime_tabular import LimeTabularExplainer
+import requests
+import os
 
 # Streamlit UI
 st.title('Hospital Overcrowding Prediction')
 
 # Load the CSV file directly
-file_path = 'https://raw.githubusercontent.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/refs/heads/main/Diagnosis_data.csv'
+file_path = 'https://raw.githubusercontent.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/main/Diagnosis_data.csv'
 
 try:
     # Load the data
@@ -36,10 +38,16 @@ try:
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
 
+    # Download and load model
+    model_url = 'https://raw.githubusercontent.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/main/best_gbm_model.pkl'
+    model_local_path = 'best_gbm_model.pkl'
     try:
-        gbm_model = joblib.load('https://raw.githubusercontent.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/main/best_gbm_model.pkl')
-        if gbm_model is None:
-            raise ValueError("The model could not be loaded properly.")
+        if not os.path.exists(model_local_path):
+            response = requests.get(model_url)
+            response.raise_for_status()
+            with open(model_local_path, 'wb') as f:
+                f.write(response.content)
+        gbm_model = joblib.load(model_local_path)
     except Exception as e:
         st.error(f"Error loading the model: {e}")
         gbm_model = None
@@ -74,7 +82,7 @@ try:
             'Middle-Aged Adults', 'Older Adults', 'Elderly 90+'
         ]
 
-        # Divide features evenly across 3 columns based on the specified order
+        # Divide features evenly across 3 columns
         num_columns = 3
         features_per_column = len(ordered_features) // num_columns + (len(ordered_features) % num_columns > 0)
         feature_groups = [ordered_features[i * features_per_column:(i + 1) * features_per_column] for i in range(num_columns)]
