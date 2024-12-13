@@ -48,9 +48,9 @@ try:
             with open(model_local_path, 'wb') as f:
                 f.write(response.content)
 
-        # Use joblib to load the model
+        # Load model using joblib
         gbm_model = joblib.load(model_local_path)
-
+            
     except Exception as e:
         st.error(f"Error loading the model: {e}")
         gbm_model = None
