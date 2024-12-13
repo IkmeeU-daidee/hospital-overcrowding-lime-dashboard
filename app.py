@@ -10,7 +10,7 @@ from lime.lime_tabular import LimeTabularExplainer
 st.title('Hospital Overcrowding Prediction')
 
 # Load the CSV file directly
-file_path = 'C:/Users/Ikmee U-daidee/cleaned_data.csv'
+file_path = 'https://github.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/blob/main/Diagnosis_data.csv'
 
 try:
     # Load the data
