@@ -39,7 +39,7 @@ try:
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
 
     # Download and load model
-    model_url = 'https://githubusercontent.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/main/best_gbm_model.pkl'
+    model_url = 'https://github.com/IkmeeU-daidee/hospital-overcrowding-lime-dashboard/blob/main/best_gbm_model.pkl'
     model_local_path = 'best_gbm_model.pkl'
     try:
         if not os.path.exists(model_local_path):
